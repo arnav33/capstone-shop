@@ -2,7 +2,6 @@ package com.capstone.usermanagementservice.controller;
 
 import com.capstone.usermanagementservice.entity.User;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
-import com.capstone.usermanagementservice.service.AuthService;
 import com.capstone.usermanagementservice.service.AuthServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
