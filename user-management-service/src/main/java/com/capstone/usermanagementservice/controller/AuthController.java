@@ -3,8 +3,8 @@ package com.capstone.usermanagementservice.controller;
 import com.capstone.usermanagementservice.entity.User;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import com.capstone.usermanagementservice.service.AuthServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,12 +18,8 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping
-    public String test() {
-        return "hello";
-    }
     @PostMapping
-    public String register(@RequestBody @Validated User user) throws UserAlreadyExistsException {
+    public String register(@RequestBody User user) throws UserAlreadyExistsException {
         return this.authService.register(user);
     }
 }

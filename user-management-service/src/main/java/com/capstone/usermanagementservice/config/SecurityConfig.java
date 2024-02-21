@@ -38,7 +38,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests($ -> $
                         .requestMatchers(HttpMethod.GET, WHITELISTED_GET_ENDPOINTS).permitAll()
                         .requestMatchers(HttpMethod.POST, WHITELISTED_POST_ENDPOINTS).permitAll()
-                            .requestMatchers("/secured").authenticated()
+                        .requestMatchers(HttpMethod.PUT, WHITELISTED_PUT_ENDPOINTS).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
                 .httpBasic().and()
