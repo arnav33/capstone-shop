@@ -3,8 +3,6 @@ package com.capstone.paymentservice.paymentgateway;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
-import com.stripe.param.PaymentIntentCreateParams;
-import com.stripe.param.PaymentLinkCreateParams;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
