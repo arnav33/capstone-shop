@@ -1,11 +1,13 @@
 package com.capstone.paymentservice.controllers;
 
+import com.capstone.paymentservice.dtos.PaymentRequest;
 import com.capstone.paymentservice.services.PaymentService;
 import com.stripe.exception.StripeException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/payment")
@@ -19,7 +21,13 @@ public class PaymentController {
     }
 
     @PostMapping
-    public Object initiatePayment() throws StripeException {
-        return this.paymentService.initiatePayment();
+    public Object initiatePayment(@RequestBody PaymentRequest paymentRequest) throws StripeException {
+        return this.paymentService.initiatePayment(paymentRequest);
+    }
+
+    @GetMapping("/{transactionId}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Object getReceipt(@RequestParam UUID transactionId) {
+        return this.paymentService.getReceipt(transactionId);
     }
 }
