@@ -1,0 +1,2 @@
+curl -XPUT 'localhost:9200/twitter/my_index/my_type/1?pretty' -H 'Content-Type: application/json' -d'{   "field : "value",   ...}'
+curl -XGET'localhost:9200/my_index/my_type/0?pretty'
