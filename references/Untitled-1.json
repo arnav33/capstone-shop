@@ -1,0 +1,149 @@
+{
+    "products": {
+        "aliases": {},
+        "mappings": {
+            "properties": {
+                "products": {
+                    "properties": {
+                        "category": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "description": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "discount": {
+                            "type": "long"
+                        },
+                        "discountCap": {
+                            "type": "long"
+                        },
+                        "id": {
+                            "type": "long"
+                        },
+                        "imageUrl": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "name": {
+                            "type": "text",
+                            "fields": {
+                                "keyword": {
+                                    "type": "keyword",
+                                    "ignore_above": 256
+                                }
+                            }
+                        },
+                        "price": {
+                            "type": "float"
+                        },
+                        "productAttributes": {
+                            "properties": {
+                                "attributeKey": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                },
+                                "attributeValue": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                },
+                                "id": {
+                                    "type": "long"
+                                }
+                            }
+                        },
+                        "productReviews": {
+                            "properties": {
+                                "comment": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                },
+                                "id": {
+                                    "type": "long"
+                                },
+                                "rating": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "productTags": {
+                            "properties": {
+                                "id": {
+                                    "type": "long"
+                                },
+                                "name": {
+                                    "type": "text",
+                                    "fields": {
+                                        "keyword": {
+                                            "type": "keyword",
+                                            "ignore_above": 256
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "quantity": {
+                            "type": "long"
+                        }
+                    }
+                }
+            }
+        },
+        "settings": {
+            "index": {
+                "routing": {
+                    "allocation": {
+                        "include": {
+                            "_tier_preference": "data_content"
+                        }
+                    }
+                },
+                "number_of_shards": "1",
+                "provided_name": "products",
+                "creation_date": "1708278093849",
+                "number_of_replicas": "1",
+                "uuid": "WLCjyKIpQr227LU3if8O-A",
+                "version": {
+                    "created": "8500010"
+                }
+            }
+        }
+    }
+}
