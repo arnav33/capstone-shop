@@ -1,7 +1,5 @@
 package com.capstone.paymentservice.dtos;
 
-import java.util.UUID;
-
 import com.capstone.paymentservice.enumerations.Currency;
 
 import lombok.Getter;

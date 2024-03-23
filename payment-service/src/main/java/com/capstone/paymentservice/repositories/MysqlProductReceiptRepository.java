@@ -8,6 +8,6 @@ import com.capstone.paymentservice.entities.ProductReceipt;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IMysqlProductReceiptRepository extends JpaRepository<ProductReceipt, UUID> {
+public interface MysqlProductReceiptRepository extends JpaRepository<ProductReceipt, UUID> {
     
 }

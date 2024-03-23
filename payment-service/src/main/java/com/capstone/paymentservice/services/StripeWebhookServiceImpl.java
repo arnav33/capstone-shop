@@ -5,12 +5,12 @@ import com.stripe.model.Event;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StripeWebhookService {
+public class StripeWebhookServiceImpl implements WebhookService {
 
-    PaymentService paymentService;
+    PaymentServiceImpl paymentServiceImpl;
 
-    public StripeWebhookService(PaymentService paymentService) {
-        this.paymentService = paymentService;
+    public StripeWebhookServiceImpl(PaymentServiceImpl paymentServiceImpl) {
+        this.paymentServiceImpl = paymentServiceImpl;
     }
 
     public void receiveStatus(Event event) {
@@ -23,17 +23,17 @@ public class StripeWebhookService {
             case "payment_intent.cancelled": break;
             case "payment_intent.created":
                 System.out.println("payment created");
-                this.paymentService.updatePaymentStatus(PaymentStatus.SUCCESSFUL);
+                this.paymentServiceImpl.updatePaymentStatus(PaymentStatus.SUCCESSFUL);
                 break;
             case "payment_intent.payment_failed":
                 System.out.println("payment failed");
-                this.paymentService.updatePaymentStatus(PaymentStatus.FAILED);
+                this.paymentServiceImpl.updatePaymentStatus(PaymentStatus.FAILED);
                 break;
             case "payment_intent.processing": break;
             case "payment_intent.requires_action": break;
             case "payment_intent.succeeded":
                 System.out.println("payment succeeded");
-                this.paymentService.updatePaymentStatus(PaymentStatus.SUCCESSFUL);
+                this.paymentServiceImpl.updatePaymentStatus(PaymentStatus.SUCCESSFUL);
                 break;
             case "payment_method.attached": break;
             case "payment_method.automatically_updated": break;
