@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IMysqlProductRepository extends JpaRepository<Product, Long> {
+public interface MysqlProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAllByCategory(Category category);
 }

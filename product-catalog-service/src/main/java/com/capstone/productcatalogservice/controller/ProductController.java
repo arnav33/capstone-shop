@@ -4,6 +4,7 @@ import com.capstone.productcatalogservice.dto.ProductRequest;
 import com.capstone.productcatalogservice.dto.ProductResponse;
 import com.capstone.productcatalogservice.entity.Product;
 import com.capstone.productcatalogservice.enumeration.Category;
+import com.capstone.productcatalogservice.service.ElasticSearchService;
 import com.capstone.productcatalogservice.service.ProductService;
 import org.elasticsearch.client.Response;
 import org.json.simple.JSONObject;
@@ -21,10 +22,12 @@ import java.util.List;
 public class ProductController {
 
     ProductService productService;
+    ElasticSearchService elasticSearchService;
 
     @Autowired
-    ProductController(ProductService productService) {
+    ProductController(ProductService productService, ElasticSearchService elasticSearchService) {
         this.productService = productService;
+        this.elasticSearchService = elasticSearchService;
     }
 
     @GetMapping
@@ -59,14 +62,14 @@ public class ProductController {
 
     @GetMapping("/add-index")
     public JSONObject addIndex() throws URISyntaxException, IOException, InterruptedException {
-        Response stringHttpResponse = this.productService.addIndex();
+        Response stringHttpResponse = this.elasticSearchService.addIndex();
         JSONObject jsonHttpResponse = new JSONObject();
-        jsonHttpResponse.put("res", jsonHttpResponse.toString());
+        jsonHttpResponse.put("res", stringHttpResponse.toString());
         return jsonHttpResponse;
     }
 
     @GetMapping("/search/{category}")
     public List<Product> search(@PathVariable String category) throws IOException, URISyntaxException, InterruptedException, ParseException {
-        return this.productService.search(Category.valueOf(category.toUpperCase()));
+        return this.elasticSearchService.search(Category.valueOf(category.toUpperCase()));
     }
 }

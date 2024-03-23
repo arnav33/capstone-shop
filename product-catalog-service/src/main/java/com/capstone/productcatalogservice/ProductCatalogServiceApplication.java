@@ -9,12 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableElasticsearchRepositories("com.capstone.productcatalogservice.repository")
 @EnableJpaRepositories("com.capstone.productcatalogservice.repository")
-@ComponentScan({
-		"com.capstone.productcatalogservice.controller",
-		"com.capstone.productcatalogservice.service",
-		"com.capstone.productcatalogservice.wrapper"
-})
-@EntityScan("com.capstone.productcatalogservice.entity")
 @SpringBootApplication
 public class ProductCatalogServiceApplication {
 
