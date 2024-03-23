@@ -3,11 +3,7 @@ package com.capstone.paymentservice.paymentgateway;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
-import com.stripe.net.Webhook;
-import com.stripe.param.PaymentLinkCreateParams;
-import com.stripe.param.PriceCreateParams;
-import com.stripe.param.ProductCreateParams;
-import com.stripe.param.WebhookEndpointCreateParams;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,40 +11,12 @@ import java.util.*;
 @Service
 public class StripePaymentGateway implements PaymentGateway {
 
+    @Value("${stripe_api_key}")
+    private String apiKey;
+
     @Override
     public Map<String, String> getPaymentLink(String name, long amount, String currency, int quantity) throws StripeException {
-        Stripe.apiKey = "sk_test_tR3PYbcVNZZ796tH88S4VQ2u";
-
-//        String productId = this.createProduct((name)).getId();
-//
-//        Price price = this.createPrice(productId, currency, amount);
-//
-//
-//        PaymentLinkCreateParams params =
-//                PaymentLinkCreateParams.builder()
-//                        .addLineItem(
-//                                PaymentLinkCreateParams.LineItem.builder()
-//                                        .setPrice(price.getId())
-//                                        .setQuantity((long) quantity)
-//                                        .build()
-//                        )
-//                        .setAfterCompletion(
-//                                PaymentLinkCreateParams.AfterCompletion.builder()
-//                                        .setType(PaymentLinkCreateParams.AfterCompletion.Type.HOSTED_CONFIRMATION)
-//                                        .setRedirect(
-//                                                PaymentLinkCreateParams.AfterCompletion.Redirect.builder()
-//                                                        .setUrl("http://localhost:4242/stripe_webhooks/api/stripeWebhook")
-//                                                        .build()
-//                                        )
-//                                        .build()
-//                        )
-//                        .build();
-//
-//        PaymentLink paymentLink = PaymentLink.create(params);
-
-
-
-
+        Stripe.apiKey = apiKey;
 
         Map<String, Object> productParams = new HashMap<>();
         productParams.put("name", name);
