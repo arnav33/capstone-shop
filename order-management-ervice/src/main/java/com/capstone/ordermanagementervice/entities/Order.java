@@ -1,7 +1,11 @@
 package com.capstone.ordermanagementervice.entities;
 
 import com.capstone.ordermanagementervice.dtos.OrderRequest;
+import com.capstone.ordermanagementervice.enumerations.PaymentStatus;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,11 +24,12 @@ public class Order extends BaseEntity {
     private UUID userId;
     private UUID addressId;
     private UUID cartId;
-    private List<UUID> transactionIds;
+    private PaymentStatus paymentStatus;
 
     public Order(OrderRequest orderRequest) {
         this.userId = orderRequest.getUserId();
         this.addressId = orderRequest.getAddressId();
         this.cartId = orderRequest.getCartId();
+        this.paymentStatus = PaymentStatus.PENDING;
     }
 }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/purchase")
+@RequestMapping("/api/v1/order")
 public class OrderController {
 
     OrderService orderService;
@@ -23,35 +23,41 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<Order> getAllPurchases() {
+    List<Order> getAllOrders() {
         return this.orderService.getAllOrders();
     }
-    @GetMapping("{purchaseId}")
+    @GetMapping("{orderId}")
     @ResponseStatus(HttpStatus.OK)
-    Order getPurchasesById(@PathVariable UUID purchaseId) {
-        return this.orderService.getOrdersById(purchaseId);
+    Order getOrdersById(@PathVariable UUID orderId) {
+        return this.orderService.getOrdersById(orderId);
     }
 
     @GetMapping("{userId}")
     @ResponseStatus(HttpStatus.OK)
-    List<Order> getAllPurchasesByUserId(@PathVariable UUID userId) {
+    List<Order> getAllOrdersByUserId(@PathVariable UUID userId) {
         return this.orderService.getAllOrdersByUserId(userId);
     }
 
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Order createCart(OrderRequest orderRequest) {
+    Order createOrder(OrderRequest orderRequest) {
         return this.orderService.createOrder(orderRequest);
     }
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateProduct(OrderRequest orderRequest, UUID cartId) {
-        this.orderService.updateOrder(orderRequest, cartId);
+    void updateOrder(OrderRequest orderRequest) {
+        this.orderService.updateOrder(orderRequest);
     }
-    @DeleteMapping("{purchaseId}")
+
+    @PutMapping("/status")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    void updateOrderStatus(OrderRequest orderRequest) {
+        this.orderService.updateOrderStatus(orderRequest);
+    }
+    @DeleteMapping("{orderId}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteProductFromTheCart(@PathVariable UUID purchaseId) {
-        this.orderService.deleteOrder(purchaseId);
+    void deleteOrder(@PathVariable UUID orderId) {
+        this.orderService.deleteOrder(orderId);
     }
 }
