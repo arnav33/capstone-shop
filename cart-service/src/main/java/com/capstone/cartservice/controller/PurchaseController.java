@@ -51,7 +51,7 @@ public class PurchaseController {
     }
     @DeleteMapping("{purchaseId}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteProductFromTheCart(@PathVariable UUID purchaseId) throws Exception {
+    void deleteProductFromTheCart(@PathVariable UUID purchaseId) {
         this.purchaseService.deletePurchase(purchaseId);
     }
 }
