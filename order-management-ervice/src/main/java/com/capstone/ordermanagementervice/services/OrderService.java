@@ -2,7 +2,6 @@ package com.capstone.ordermanagementervice.services;
 
 import com.capstone.ordermanagementervice.dtos.OrderRequest;
 import com.capstone.ordermanagementervice.entities.Order;
-import com.capstone.ordermanagementervice.enumerations.PaymentStatus;
 
 import java.util.List;
 import java.util.UUID;

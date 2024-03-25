@@ -2,7 +2,6 @@ package com.capstone.ordermanagementervice.services;
 
 import com.capstone.ordermanagementervice.dtos.OrderRequest;
 import com.capstone.ordermanagementervice.entities.Order;
-import com.capstone.ordermanagementervice.enumerations.PaymentStatus;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
