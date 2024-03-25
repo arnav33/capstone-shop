@@ -12,7 +12,7 @@ import java.util.UUID;
 @Setter
 @Data
 @AllArgsConstructor
-public class PurchaseRequest {
+public class OrderRequest {
     private UUID userId;
     private UUID addressId;
     private UUID cartId;

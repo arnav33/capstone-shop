@@ -1,6 +1,6 @@
 package com.capstone.ordermanagementervice.repositories;
 
-import com.capstone.ordermanagementervice.entities.Purchase;
+import com.capstone.ordermanagementervice.entities.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface MysqlPurchaseRepository extends JpaRepository<Purchase, UUID> {
+public interface MysqlOrderRepository extends JpaRepository<Order, UUID> {
 
-    List<Purchase> findPurchasesByUserId(UUID userId);
+    List<Order> findOrdersByUserId(UUID userId);
 }

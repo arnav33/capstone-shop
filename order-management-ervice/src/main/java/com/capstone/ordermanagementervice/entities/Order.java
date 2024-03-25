@@ -1,12 +1,13 @@
 package com.capstone.ordermanagementervice.entities;
 
-import com.capstone.ordermanagementervice.dtos.PurchaseRequest;
+import com.capstone.ordermanagementervice.dtos.OrderRequest;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -14,16 +15,16 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Purchase extends BaseEntity {
+public class Order extends BaseEntity {
 
     private UUID userId;
     private UUID addressId;
     private UUID cartId;
-    private String transactionId;
+    private List<UUID> transactionIds;
 
-    public Purchase(PurchaseRequest purchaseRequest) {
-        this.userId = purchaseRequest.getUserId();
-        this.addressId = purchaseRequest.getAddressId();
-        this.cartId = purchaseRequest.getCartId();
+    public Order(OrderRequest orderRequest) {
+        this.userId = orderRequest.getUserId();
+        this.addressId = orderRequest.getAddressId();
+        this.cartId = orderRequest.getCartId();
     }
 }
