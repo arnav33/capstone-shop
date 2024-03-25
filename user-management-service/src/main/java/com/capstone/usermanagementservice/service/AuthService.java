@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 public interface AuthService {
 
     public String register(User user) throws UserAlreadyExistsException;
+    public User login(User user);
 }

@@ -2,7 +2,6 @@ package com.capstone.usermanagementservice.service;
 
 import com.capstone.usermanagementservice.entity.User;
 import com.capstone.usermanagementservice.repository.UserRepository;
-import jakarta.validation.Valid;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
