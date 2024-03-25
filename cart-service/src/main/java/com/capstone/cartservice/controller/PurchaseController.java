@@ -34,8 +34,8 @@ public class PurchaseController {
 
     @GetMapping("{userId}")
     @ResponseStatus(HttpStatus.OK)
-    List<Purchase> getPurchasessByUserId(@PathVariable UUID userId) {
-        return this.purchaseService.getPurchasesByUserId(userId);
+    List<Purchase> getAllPurchasesByUserId(@PathVariable UUID userId) {
+        return this.purchaseService.getAllPurchasesByUserId(userId);
     }
 
 
@@ -51,7 +51,7 @@ public class PurchaseController {
     }
     @DeleteMapping("{purchaseId}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteProductFromTheCart(@PathVariable UUID purchaseId, UUID userId) throws Exception {
+    void deleteProductFromTheCart(@PathVariable UUID purchaseId) throws Exception {
         this.purchaseService.deletePurchase(purchaseId);
     }
 }

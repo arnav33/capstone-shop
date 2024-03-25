@@ -40,10 +40,6 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchase;
     }
 
-    public List<Purchase> getPurchasesByUserId(UUID userId) {
-        return this.purchaseRepository.findPurchasesByUserId(userId);
-    }
-
     public void updatePurchase(PurchaseRequest purchaseRequest, UUID purchaseId) {
         Purchase purchase = new Purchase(purchaseRequest);
         Optional<Purchase> op = purchaseRepository.findById(purchaseId);

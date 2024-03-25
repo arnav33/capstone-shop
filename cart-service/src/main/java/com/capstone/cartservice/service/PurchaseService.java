@@ -12,7 +12,6 @@ public interface PurchaseService {
     Purchase getPurchaseById(UUID purchaseId);
     List<Purchase> getAllPurchasesByUserId(UUID userId);
     Purchase createPurchase(PurchaseRequest purchaseRequest);
-    List<Purchase> getPurchasesByUserId(UUID userId);
     void updatePurchase(PurchaseRequest purchaseRequest, UUID purchaseId);
     void deletePurchase(UUID purchaseId);
 }
