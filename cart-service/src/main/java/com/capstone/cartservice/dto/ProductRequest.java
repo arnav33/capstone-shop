@@ -1,15 +1,15 @@
 package com.capstone.cartservice.dto;
 
+import com.capstone.cartservice.entity.BaseEntity;
 import jakarta.persistence.Entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class ProductRequest {
+@Getter
+@Setter
+public class ProductRequest extends BaseEntity {
     private String productId;
     private float price;
     private int discount;

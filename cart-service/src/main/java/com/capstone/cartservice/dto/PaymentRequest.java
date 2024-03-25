@@ -1,5 +1,6 @@
 package com.capstone.cartservice.dto;
 
+import com.capstone.cartservice.paymentmethods.PaymentMethod;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -13,6 +14,6 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PaymentRequest {
     UUID purchaseId;
-    IPaymentMethod paymentMethod;
+    PaymentMethod paymentMethod;
     UUID addressID;
 }

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface IMysqlPurchaseRepository extends JpaRepository<Purchase, UUID> {
+public interface MysqlPurchaseRepository extends JpaRepository<Purchase, UUID> {
 
-    List<Purchase> findPurchasesByUserId(String userId);
+    List<Purchase> findPurchasesByUserId(UUID userId);
 }

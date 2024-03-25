@@ -61,6 +61,7 @@ public class ProductController {
     }
 
     @GetMapping("/add-index")
+    @ResponseStatus(HttpStatus.OK)
     public JSONObject addIndex() throws URISyntaxException, IOException, InterruptedException {
         Response stringHttpResponse = this.elasticSearchService.addIndex();
         JSONObject jsonHttpResponse = new JSONObject();
@@ -69,6 +70,7 @@ public class ProductController {
     }
 
     @GetMapping("/search/{category}")
+    @ResponseStatus(HttpStatus.OK)
     public List<Product> search(@PathVariable String category) throws IOException, URISyntaxException, InterruptedException, ParseException {
         return this.elasticSearchService.search(Category.valueOf(category.toUpperCase()));
     }
