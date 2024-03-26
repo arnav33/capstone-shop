@@ -29,12 +29,12 @@ public class AuthController {
         return this.authService.login(loginRequest);
     }
 
-    @PostMapping("/validate")
-    public SessionStatus validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
-        return authService.validate(authorization.split(" ")[1]);
+    @GetMapping("/validate")
+    public String validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        return authService.validate(authorization.split(" ")[1]).toString();
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public void logout(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
         this.authService.logout(authorization.split(" ")[1]);
     }

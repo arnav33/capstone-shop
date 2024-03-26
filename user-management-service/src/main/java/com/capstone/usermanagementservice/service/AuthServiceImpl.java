@@ -14,6 +14,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.MacAlgorithm;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AuthorizationServiceException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -97,7 +98,7 @@ public class AuthServiceImpl implements AuthService {
         Optional<Session> sessionOptional = sessionRepository.findByToken(token);
 
         if (sessionOptional.isEmpty()) {
-            return null;
+            throw new AuthorizationServiceException("Access Denied");
         }
 
         Session session = sessionOptional.get();
@@ -112,7 +113,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         if(!session.getToken().equals(token)) {
-            return null;
+            throw new AuthorizationServiceException("Access Denied");
         }
 
         return SessionStatus.ACTIVE;
