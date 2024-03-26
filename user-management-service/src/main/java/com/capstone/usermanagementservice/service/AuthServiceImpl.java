@@ -31,7 +31,7 @@ public class AuthServiceImpl implements AuthService {
     SessionRepository sessionRepository;
 
     @Autowired
-    public AuthServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, SessionRepository sessionRepository) {
+    public AuthServiceImpl(UserRepository userRepository, SessionRepository sessionRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = new BCryptPasswordEncoder();
         this.sessionRepository = sessionRepository;
@@ -51,8 +51,7 @@ public class AuthServiceImpl implements AuthService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         this.userRepository.save(user);
-        RegistrationResponse registrationResponse = new RegistrationResponse(user.getId(), "User added to db.");
-        return registrationResponse;
+        return new RegistrationResponse(user.getId(), "User added to db.");
     }
 
     @Override
@@ -122,7 +121,7 @@ public class AuthServiceImpl implements AuthService {
     public void logout(String token, UUID userId) {
         Optional<Session> sessionOptional = sessionRepository.findByTokenAndUser_Id(token, userId);
         if (sessionOptional.isEmpty()) {
-            return null;
+            return;
         }
         Session session = sessionOptional.get();
         session.setSessionStatus(SessionStatus.ENDED);

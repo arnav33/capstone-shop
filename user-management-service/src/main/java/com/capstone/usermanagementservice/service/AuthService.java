@@ -6,7 +6,6 @@ import com.capstone.usermanagementservice.dtos.RegistrationRequest;
 import com.capstone.usermanagementservice.dtos.RegistrationResponse;
 import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
