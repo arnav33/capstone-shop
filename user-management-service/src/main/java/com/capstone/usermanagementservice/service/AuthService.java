@@ -8,8 +8,6 @@ import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public interface AuthService {
 
