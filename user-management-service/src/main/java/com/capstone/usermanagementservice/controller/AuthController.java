@@ -1,13 +1,13 @@
 package com.capstone.usermanagementservice.controller;
 
-import com.capstone.usermanagementservice.dtos.LoginRequest;
-import com.capstone.usermanagementservice.dtos.LoginResponse;
-import com.capstone.usermanagementservice.dtos.RegistrationRequest;
-import com.capstone.usermanagementservice.dtos.RegistrationResponse;
+import com.capstone.usermanagementservice.dtos.*;
 import com.capstone.usermanagementservice.entity.User;
+import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import com.capstone.usermanagementservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,5 +29,15 @@ public class AuthController {
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         return this.authService.login(loginRequest);
+    }
+
+    @PostMapping("/validate")
+    public SessionStatus validateToken(@RequestBody ValidateTokenRequestDto request) {
+        return authService.validate(request.getToken(), request.getUserId());
+    }
+
+    @PostMapping("/logout")
+    public void logout(@RequestBody LogoutRequest logoutRequest) {
+        this.authService.logout(logoutRequest.getToken(), logoutRequest.getUserId());
     }
 }

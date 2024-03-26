@@ -11,7 +11,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class RegistrationResponse {
-    private UUID id;
-    private String message;
+public class LogoutRequest {
+    private String token;
+    private UUID userId;
 }

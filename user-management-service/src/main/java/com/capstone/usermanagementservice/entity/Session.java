@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Session extends BaseEntity {
     private String token;
-    private String expiringAt;
+    private Date expiringAt;
     @ManyToOne
     private User user;
     @Enumerated
