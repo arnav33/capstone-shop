@@ -21,6 +21,8 @@ public class User implements UserDetails {
     private String password;
     private String email;
     private String mobile;
+    private String firstName;
+    private String lastName;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<CustomGrantedAuthority> authorities;

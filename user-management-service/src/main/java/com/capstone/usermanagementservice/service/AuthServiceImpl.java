@@ -1,16 +1,21 @@
 package com.capstone.usermanagementservice.service;
 
+import com.capstone.usermanagementservice.dtos.LoginRequest;
+import com.capstone.usermanagementservice.dtos.LoginResponse;
+import com.capstone.usermanagementservice.dtos.RegistrationRequest;
+import com.capstone.usermanagementservice.dtos.RegistrationResponse;
 import com.capstone.usermanagementservice.entity.Session;
 import com.capstone.usermanagementservice.entity.User;
-import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import com.capstone.usermanagementservice.repository.SessionRepository;
 import com.capstone.usermanagementservice.repository.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.MacAlgorithm;
-import jakarta.ws.rs.core.HttpHeaders;
-import org.apache.commons.lang.time.DateUtils;
+//import jakarta.ws.rs.core.HttpHeaders;
+//import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,25 +41,28 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public String register(User user) throws UserAlreadyExistsException {
-        Optional<User> userOptional = this.userRepository.findByUsername(user.getUsername());
+    public RegistrationResponse register(RegistrationRequest registrationRequest) throws UserAlreadyExistsException {
+        Optional<User> userOptional = this.userRepository.findByUsername(registrationRequest.getUsername());
         if(userOptional.isPresent()) {
             throw new UserAlreadyExistsException("User Already Exists.");
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        User user = new User();
+        user.setUsername(registrationRequest.getUsername());
+        user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
         user.setEnabled(true);
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         this.userRepository.save(user);
-        return "User added to db";
+        RegistrationResponse registrationResponse = new RegistrationResponse("User added to db.");
+        return registrationResponse;
     }
 
     @Override
-    public User login(User userRequest) {
-        Optional<User> optionalUser = this.userRepository.findByUsername(userRequest.getUsername());
+    public LoginResponse login(LoginRequest loginRequest) {
+        Optional<User> optionalUser = this.userRepository.findByUsername(loginRequest.getUsername());
         User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("User doesn't exist"));
-        if (!passwordEncoder.matches(userRequest.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(loginRequest.getPassword(), user.getPassword())) {
             throw new RuntimeException("Wrong password entered");
         }
         MacAlgorithm alg = Jwts.SIG.HS256; //or HS384 or HS256
@@ -71,18 +79,18 @@ public class AuthServiceImpl implements AuthService {
                 .compact();
 
         Session session = new Session();
-        session.setSessionStatus(SessionStatus.ACTIVE);
+//        session.setSessionStatus(SessionStatus.ACTIVE);
         session.setToken(jws);
         session.setUser(user);
         //session.setExpiringAt(//current time + 30 days);
         sessionRepository.save(session);
 
-        User userDto = new User();
-        userDto.setEmail(userRequest.getEmail());
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setEmail(user.getEmail());
+        loginResponse.setMobile(user.getMobile());
+        loginResponse.setUsername(user.getUsername());
+        loginResponse.setToken(jws);
 
-        MultiValueMapAdapter<String, String> headers = new MultiValueMapAdapter<>(new HashMap<>());
-        headers.add(HttpHeaders.SET_COOKIE, "auth-token:" + jws);
-
-        return user;
+        return loginResponse;
     }
 }

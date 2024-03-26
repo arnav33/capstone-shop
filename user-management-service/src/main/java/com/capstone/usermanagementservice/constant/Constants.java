@@ -9,7 +9,8 @@ public class Constants {
     };
 
     public static final String[] WHITELISTED_POST_ENDPOINTS = {
-            "/auth"
+            "/auth/register",
+            "/auth/login"
     };
 
     public static final String[] WHITELISTED_PUT_ENDPOINTS = {
