@@ -5,6 +5,7 @@ import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import com.capstone.usermanagementservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,12 +30,12 @@ public class AuthController {
     }
 
     @PostMapping("/validate")
-    public SessionStatus validateToken(@RequestBody ValidateTokenRequestDto request) {
-        return authService.validate(request.getToken(), request.getUserId());
+    public SessionStatus validateToken(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        return authService.validate(authorization.split(" ")[1]);
     }
 
     @PostMapping("/logout")
-    public void logout(@RequestBody LogoutRequest logoutRequest) {
-        this.authService.logout(logoutRequest.getToken(), logoutRequest.getUserId());
+    public void logout(@RequestHeader(HttpHeaders.AUTHORIZATION) String authorization) {
+        this.authService.logout(authorization.split(" ")[1]);
     }
 }

@@ -12,6 +12,5 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegistrationResponse {
-    private UUID id;
     private String message;
 }

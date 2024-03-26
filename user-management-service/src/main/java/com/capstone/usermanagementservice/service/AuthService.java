@@ -15,6 +15,6 @@ public interface AuthService {
 
     RegistrationResponse register(RegistrationRequest registrationRequest) throws UserAlreadyExistsException;
     LoginResponse login(LoginRequest loginRequest);
-    SessionStatus validate(String token, UUID userId);
-    void logout(String token, UUID userId);
+    SessionStatus validate(String token);
+    void logout(String token);
 }

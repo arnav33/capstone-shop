@@ -51,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         this.userRepository.save(user);
-        return new RegistrationResponse(user.getId(), "User added to db.");
+        return new RegistrationResponse("User added to db.");
     }
 
     @Override
@@ -93,8 +93,8 @@ public class AuthServiceImpl implements AuthService {
         return loginResponse;
     }
 
-    public SessionStatus validate(String token, UUID userId) {
-        Optional<Session> sessionOptional = sessionRepository.findByTokenAndUser_Id(token, userId);
+    public SessionStatus validate(String token) {
+        Optional<Session> sessionOptional = sessionRepository.findByToken(token);
 
         if (sessionOptional.isEmpty()) {
             return null;
@@ -118,8 +118,8 @@ public class AuthServiceImpl implements AuthService {
         return SessionStatus.ACTIVE;
     }
 
-    public void logout(String token, UUID userId) {
-        Optional<Session> sessionOptional = sessionRepository.findByTokenAndUser_Id(token, userId);
+    public void logout(String token) {
+        Optional<Session> sessionOptional = sessionRepository.findByToken(token);
         if (sessionOptional.isEmpty()) {
             return;
         }
