@@ -10,26 +10,16 @@ import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import com.capstone.usermanagementservice.repository.SessionRepository;
 import com.capstone.usermanagementservice.repository.UserRepository;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.MacAlgorithm;
-//import jakarta.ws.rs.core.HttpHeaders;
-//import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMapAdapter;
 
 import javax.crypto.SecretKey;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Service
@@ -129,7 +119,7 @@ public class AuthServiceImpl implements AuthService {
         return SessionStatus.ACTIVE;
     }
 
-    public ResponseEntity<Void> logout(String token, UUID userId) {
+    public void logout(String token, UUID userId) {
         Optional<Session> sessionOptional = sessionRepository.findByTokenAndUser_Id(token, userId);
         if (sessionOptional.isEmpty()) {
             return null;
@@ -137,6 +127,5 @@ public class AuthServiceImpl implements AuthService {
         Session session = sessionOptional.get();
         session.setSessionStatus(SessionStatus.ENDED);
         sessionRepository.save(session);
-        return ResponseEntity.ok().build();
     }
 }

@@ -1,13 +1,10 @@
 package com.capstone.usermanagementservice.controller;
 
 import com.capstone.usermanagementservice.dtos.*;
-import com.capstone.usermanagementservice.entity.User;
 import com.capstone.usermanagementservice.enumerations.SessionStatus;
 import com.capstone.usermanagementservice.exception.UserAlreadyExistsException;
 import com.capstone.usermanagementservice.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
