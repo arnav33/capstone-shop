@@ -1,7 +1,8 @@
 package com.capstone.ordermanagementervice.controllers;
 
+import com.capstone.ordermanagementervice.dtos.CreateOrderRequest;
 import com.capstone.ordermanagementervice.dtos.OrderRequest;
-import com.capstone.ordermanagementervice.entities.Order;
+import com.capstone.ordermanagementervice.entities.ProductOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,36 +24,36 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<Order> getAllOrders() {
+    List<ProductOrder> getAllOrders() {
         return this.orderService.getAllOrders();
     }
     @GetMapping("{orderId}")
     @ResponseStatus(HttpStatus.OK)
-    Order getOrdersById(@PathVariable UUID orderId) {
+    ProductOrder getOrdersById(@PathVariable UUID orderId) {
         return this.orderService.getOrdersById(orderId);
     }
 
     @GetMapping("{userId}")
     @ResponseStatus(HttpStatus.OK)
-    List<Order> getAllOrdersByUserId(@PathVariable UUID userId) {
+    List<ProductOrder> getAllOrdersByUserId(@PathVariable UUID userId) {
         return this.orderService.getAllOrdersByUserId(userId);
     }
 
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    Order createOrder(OrderRequest orderRequest) {
-        return this.orderService.createOrder(orderRequest);
+    ProductOrder createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
+        return this.orderService.createOrder(createOrderRequest);
     }
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateOrder(OrderRequest orderRequest) {
+    void updateOrder(@RequestBody OrderRequest orderRequest) {
         this.orderService.updateOrder(orderRequest);
     }
 
     @PutMapping("/status")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateOrderStatus(OrderRequest orderRequest) {
+    void updateOrderStatus(@RequestBody OrderRequest orderRequest) {
         this.orderService.updateOrderStatus(orderRequest);
     }
     @DeleteMapping("{orderId}")
