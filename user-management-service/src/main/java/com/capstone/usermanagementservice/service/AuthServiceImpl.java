@@ -90,11 +90,7 @@ public class AuthServiceImpl implements AuthService {
         //session.setExpiringAt(//current time + 30 days);
         sessionRepository.save(session);
 
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setId(user.getId());
-        loginResponse.setEmail(user.getEmail());
-        loginResponse.setMobile(user.getMobile());
-        loginResponse.setUsername(user.getUsername());
+        LoginResponse loginResponse = new LoginResponse(user);
         loginResponse.setToken(jws);
 
         return loginResponse;
