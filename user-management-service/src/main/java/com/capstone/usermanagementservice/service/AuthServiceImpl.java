@@ -91,6 +91,7 @@ public class AuthServiceImpl implements AuthService {
         sessionRepository.save(session);
 
         LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setId(user.getId());
         loginResponse.setEmail(user.getEmail());
         loginResponse.setMobile(user.getMobile());
         loginResponse.setUsername(user.getUsername());
