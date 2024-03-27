@@ -1,10 +1,7 @@
 package com.capstone.cartservice.entity;
 
-import com.capstone.cartservice.dto.CartRequest;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

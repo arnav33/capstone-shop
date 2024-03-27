@@ -1,7 +1,6 @@
 package com.capstone.cartservice.dto;
 
 import com.capstone.cartservice.entity.BaseEntity;
-import jakarta.persistence.Entity;
 import lombok.*;
 
 import java.util.UUID;
