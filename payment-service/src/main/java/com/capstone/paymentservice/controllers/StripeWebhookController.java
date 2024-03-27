@@ -7,7 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/stripeWebhook")
+@RequestMapping("/api/v1/stripeWebhook")
 public class StripeWebhookController {
 
     WebhookService webhookService;
