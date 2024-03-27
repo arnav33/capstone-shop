@@ -1,6 +1,6 @@
-package com.capstone.productcatalogservice.interceptor;
+package com.capstone.productcatalogservice.security.interceptor;
 
-import com.capstone.productcatalogservice.service.AuthService;
+import com.capstone.productcatalogservice.security.services.AuthService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -19,6 +19,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new CustomInterceptorImpl(authService))
-                .addPathPatterns("/api/v1/product/**");
+                .addPathPatterns("/api/v1/**");
     }
 }

@@ -1,15 +1,11 @@
-package com.capstone.productcatalogservice.interceptor;
+package com.capstone.productcatalogservice.security.interceptor;
 
-import com.capstone.productcatalogservice.service.AuthService;
-import com.capstone.productcatalogservice.service.AuthServiceImpl;
+import com.capstone.productcatalogservice.security.services.AuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.naming.AuthenticationException;
-import java.lang.annotation.Annotation;
 
 public class CustomInterceptorImpl implements HandlerInterceptor {
 

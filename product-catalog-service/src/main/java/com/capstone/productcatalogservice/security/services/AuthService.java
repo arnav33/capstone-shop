@@ -1,4 +1,4 @@
-package com.capstone.productcatalogservice.service;
+package com.capstone.productcatalogservice.security.services;
 
 import javax.naming.AuthenticationException;
 import java.net.URISyntaxException;
