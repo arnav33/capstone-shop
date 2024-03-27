@@ -47,12 +47,17 @@ public class AuthServiceImpl implements AuthService {
         User user = new User();
         user.setUsername(registrationRequest.getUsername());
         user.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
-        user.setEnabled(true);
+        user.setEmail(registrationRequest.getEmail());
+        user.setMobile(registrationRequest.getMobile());
+        user.setFirstName(registrationRequest.getFirstName());
+        user.setLastName(registrationRequest.getLastName());
+        user.setAddress(registrationRequest.getAddress());
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
-        this.userRepository.save(user);
-        return new RegistrationResponse("User added to db.");
+        user.setEnabled(true);
+        User savedUser = this.userRepository.save(user);
+        return new RegistrationResponse(savedUser);
     }
 
     @Override

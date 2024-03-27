@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,22 +38,26 @@ public class CartServiceImpl implements CartService {
     }
 
     public Cart createCart(CartRequest cartRequest) {
-        Cart cart = new Cart(cartRequest);
-        this.cartRepository.save(cart);
-        return cart;
+        Cart cart = new Cart();
+        cart.setProducts(new ArrayList<>());
+        cart.setUserId(cartRequest.getUserId());
+        return this.cartRepository.save(cart);
     }
 
     public void updateProduct(CartRequest cartRequest, UUID cartId) {
-        Cart cart = new Cart(cartRequest);
+        Cart cart = new Cart();
+        cart.setProducts(new ArrayList<>());
+        cart.setUserId(cartRequest.getUserId());
         Optional<Cart> op = cartRepository.findById(cartId);
         Cart savedCart = op.orElseThrow(() -> new EntityNotFoundException("Product with the id " + cartId + " not found in the system"));
         cart.setId(savedCart.getId());
         this.cartRepository.save(cart);
     }
 
-    public void addProductToTheCart(ProductRequest productRequest, UUID userId) {
+    public void addProductToTheCart(ProductRequest productRequest) {
         Product product = new Product(productRequest);
-        Cart cart = cartRepository.findCartByUserId(userId);
+        Optional<Cart> optionalCart = cartRepository.findById(productRequest.getCartId());
+        Cart cart = optionalCart.orElseThrow(() -> new EntityNotFoundException("Cart doesn't exist"));
         cart.getProducts().add(product);
         cartRepository.save(cart);
     }

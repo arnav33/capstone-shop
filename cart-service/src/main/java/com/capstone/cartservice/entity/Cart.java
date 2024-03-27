@@ -20,9 +20,4 @@ public class Cart extends BaseEntity {
     List<Product> products;
 
     UUID userId;
-
-    public Cart(CartRequest cartRequest) {
-        this.products = new ArrayList<>();
-        this.userId = cartRequest.getUserId();
-    }
 }

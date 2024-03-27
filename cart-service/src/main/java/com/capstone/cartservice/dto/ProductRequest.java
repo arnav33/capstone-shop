@@ -4,13 +4,14 @@ import com.capstone.cartservice.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.*;
 
-@Entity
+import java.util.UUID;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class ProductRequest extends BaseEntity {
-    private String productId;
+    private UUID cartId;
     private float price;
     private int discount;
     private int discountCap;

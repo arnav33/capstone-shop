@@ -14,6 +14,6 @@ public interface CartService {
     Cart getCartByUserId(UUID userId);
     Cart createCart(CartRequest cartRequest);
     void updateProduct(CartRequest cartRequest, UUID cartId);
-    void addProductToTheCart(ProductRequest productRequest, UUID userId);
+    void addProductToTheCart(ProductRequest productRequest);
     void deleteProductFromTheCart(ProductRequest productRequest, UUID userId) throws Exception;
 }

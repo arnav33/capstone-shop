@@ -39,22 +39,22 @@ public class CartController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    CartResponse createCart(CartRequest cartRequest) {
+    CartResponse createCart(@RequestBody CartRequest cartRequest) {
         return new CartResponse(this.cartService.createCart(cartRequest));
     }
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateProduct(CartRequest cartRequest, UUID cartId) {
+    void updateProduct(@RequestBody CartRequest cartRequest, UUID cartId) {
         this.cartService.updateProduct(cartRequest, cartId);
     }
     @PatchMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void addProductToTheCart(ProductRequest productRequest, UUID userId) {
-        this.cartService.addProductToTheCart(productRequest, userId);
+    void addProductToTheCart(@RequestBody ProductRequest productRequest) {
+        this.cartService.addProductToTheCart(productRequest);
     }
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    void deleteProductFromTheCart(ProductRequest productRequest, UUID userId) throws Exception {
+    void deleteProductFromTheCart(@RequestBody ProductRequest productRequest, UUID userId) throws Exception {
         this.cartService.deleteProductFromTheCart(productRequest, userId);
     }
 }

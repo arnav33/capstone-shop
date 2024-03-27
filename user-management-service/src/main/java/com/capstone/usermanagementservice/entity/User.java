@@ -1,5 +1,6 @@
 package com.capstone.usermanagementservice.entity;
 
+import com.capstone.usermanagementservice.dtos.RegistrationRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,8 @@ public class User implements UserDetails {
     private String mobile;
     private String firstName;
     private String lastName;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Address address;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<CustomGrantedAuthority> authorities;
