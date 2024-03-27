@@ -13,7 +13,7 @@ import javax.naming.AuthenticationException;
 @Service
 public class AuthServiceImpl implements AuthService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
     @Value("${auth.server}")
     private String authServer;
 
@@ -26,7 +26,7 @@ public class AuthServiceImpl implements AuthService {
         headers.add("Authorization", token);
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
         ResponseEntity<?> result = restTemplate.exchange(authServer, HttpMethod.GET, entity, String.class);
-        if(!result.getBody().toString().equals("ACTIVE")) {
+        if(result.getBody() == null || !result.getBody().toString().equals("ACTIVE")) {
             throw new AuthenticationException("Access Denied");
         }
         return result.getBody().toString();
