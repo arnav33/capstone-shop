@@ -24,18 +24,18 @@ public class OrderController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<ProductOrder> getAllOrders() {
+    public List<ProductOrder> getAllOrders() {
         return this.orderService.getAllOrders();
     }
     @GetMapping("{orderId}")
     @ResponseStatus(HttpStatus.OK)
-    ProductOrder getOrdersById(@PathVariable UUID orderId) {
+    public ProductOrder getOrdersById(@PathVariable UUID orderId) {
         return this.orderService.getOrdersById(orderId);
     }
 
     @GetMapping("{userId}")
     @ResponseStatus(HttpStatus.OK)
-    List<ProductOrder> getAllOrdersByUserId(@PathVariable UUID userId) {
+    public List<ProductOrder> getAllOrdersByUserId(@PathVariable UUID userId) {
         return this.orderService.getAllOrdersByUserId(userId);
     }
 
@@ -47,18 +47,18 @@ public class OrderController {
     }
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateOrder(@RequestBody OrderRequest orderRequest) {
+    public void updateOrder(@RequestBody OrderRequest orderRequest) {
         this.orderService.updateOrder(orderRequest);
     }
 
     @PutMapping("/status")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateOrderStatus(@RequestBody OrderRequest orderRequest) {
+    public void updateOrderStatus(@RequestBody OrderRequest orderRequest) {
         this.orderService.updateOrderStatus(orderRequest);
     }
     @DeleteMapping("{orderId}")
     @ResponseStatus(HttpStatus.OK)
-    void deleteOrder(@PathVariable UUID orderId) {
+    public void deleteOrder(@PathVariable UUID orderId) {
         this.orderService.deleteOrder(orderId);
     }
 }
