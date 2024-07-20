@@ -83,4 +83,59 @@ class ProductControllerTest {
     }
 
     @Test
-    void
+    void testUpdateProduct() {
+        // Arrange
+        Long productId = 1L;
+        ProductRequest productRequest = new ProductRequest();
+        doNothing().when(productService).updateProduct(productRequest, productId);
+
+        // Act
+        productController.updateProduct(productRequest, productId);
+
+        // Assert
+        verify(productService, times(1)).updateProduct(productRequest, productId);
+    }
+
+    @Test
+    void testDeleteProduct() {
+        // Arrange
+        Long productId = 1L;
+        doNothing().when(productService).deleteProduct(productId);
+
+        // Act
+        productController.deleteProduct(productId);
+
+        // Assert
+        verify(productService, times(1)).deleteProduct(productId);
+    }
+
+    @Test
+    void testAddIndex() throws URISyntaxException, IOException, InterruptedException {
+        // Arrange
+        // Assuming Response is a mock object
+        Response mockResponse = mock(Response.class);
+        when(elasticSearchService.addIndex()).thenReturn(mockResponse);
+
+        // Act
+        JSONObject result = productController.addIndex();
+
+        // Assert
+        assertNotNull(result);
+        verify(elasticSearchService, times(1)).addIndex();
+    }
+
+    @Test
+    void testSearch() throws IOException, URISyntaxException, InterruptedException, ParseException {
+        // Arrange
+        String category = "ELECTRONICS";
+        List<Product> products = Arrays.asList(new Product(), new Product());
+        when(elasticSearchService.search(any())).thenReturn(products);
+
+        // Act
+        List<Product> result = productController.search(category);
+
+        // Assert
+        assertEquals(2, result.size());
+        verify(elasticSearchService, times(1)).search(any());
+    }
+}
