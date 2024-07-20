@@ -5,14 +5,15 @@ import com.capstone.productcatalogservice.dto.ProductResponse;
 import com.capstone.productcatalogservice.entity.Product;
 import com.capstone.productcatalogservice.service.ElasticSearchService;
 import com.capstone.productcatalogservice.service.ProductService;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
+import org.elasticsearch.client.Response;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Arrays;
