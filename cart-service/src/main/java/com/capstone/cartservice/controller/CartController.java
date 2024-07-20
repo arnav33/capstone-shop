@@ -24,37 +24,37 @@ public class CartController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    List<CartResponse> getAllCarts() {
+    public List<CartResponse> getAllCarts() {
         return this.cartService.getAllCarts().stream().map(CartResponse::new).toList();
     }
     @GetMapping("{cartId}")
     @ResponseStatus(HttpStatus.OK)
-    CartResponse getCartById(@PathVariable UUID cartId) {
+    public CartResponse getCartById(@PathVariable UUID cartId) {
         return new CartResponse(this.cartService.getCartById(cartId));
     }
     @GetMapping("{userId}")
     @ResponseStatus(HttpStatus.OK)
-    CartResponse getCartByUserId(@PathVariable UUID userId) {
+    public CartResponse getCartByUserId(@PathVariable UUID userId) {
         return new CartResponse(this.cartService.getCartByUserId(userId));
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    CartResponse createCart(@RequestBody CartRequest cartRequest) {
+    public CartResponse createCart(@RequestBody CartRequest cartRequest) {
         return new CartResponse(this.cartService.createCart(cartRequest));
     }
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void updateProduct(@RequestBody CartRequest cartRequest, UUID cartId) {
+    public void updateProduct(@RequestBody CartRequest cartRequest, UUID cartId) {
         this.cartService.updateProduct(cartRequest, cartId);
     }
     @PatchMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    void addProductToTheCart(@RequestBody ProductRequest productRequest) {
+    public void addProductToTheCart(@RequestBody ProductRequest productRequest) {
         this.cartService.addProductToTheCart(productRequest);
     }
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    void deleteProductFromTheCart(@RequestBody ProductRequest productRequest, UUID userId) throws Exception {
+    public void deleteProductFromTheCart(@RequestBody ProductRequest productRequest, UUID userId) throws Exception {
         this.cartService.deleteProductFromTheCart(productRequest, userId);
     }
 }
