@@ -30,14 +30,14 @@ public class OrderController {
     }
     @GetMapping("{orderId}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_SELLER')")
     public ProductOrder getOrdersById(@PathVariable UUID orderId) {
         return this.orderService.getOrdersById(orderId);
     }
 
     @GetMapping("{userId}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_SELLER')")
     public List<ProductOrder> getAllOrdersByUserId(@PathVariable UUID userId) {
         return this.orderService.getAllOrdersByUserId(userId);
     }
@@ -45,13 +45,13 @@ public class OrderController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     ProductOrder createOrder(@RequestBody CreateOrderRequest createOrderRequest) {
         return this.orderService.createOrder(createOrderRequest);
     }
     @PutMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public void updateOrder(@RequestBody OrderRequest orderRequest) {
         this.orderService.updateOrder(orderRequest);
     }

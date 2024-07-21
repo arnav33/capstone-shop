@@ -25,13 +25,13 @@ public class CartController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_SELLER')")
     public List<CartResponse> getAllCarts() {
         return this.cartService.getAllCarts().stream().map(CartResponse::new).toList();
     }
     @GetMapping("{cartId}")
     @ResponseStatus(HttpStatus.OK)
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN') or hasAuthority('ROLE_SELLER')")
     public CartResponse getCartById(@PathVariable UUID cartId) {
         return new CartResponse(this.cartService.getCartById(cartId));
     }
