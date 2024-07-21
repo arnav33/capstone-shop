@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -32,36 +33,42 @@ public class ProductController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public List<ProductResponse> getAllProducts() {
         return this.productService.getAllProducts().stream().map(ProductResponse::new).toList();
     }
 
     @GetMapping("{productId}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public ProductResponse getProductById(@PathVariable Long productId) {
         return new ProductResponse(this.productService.getProductById(productId));
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ProductResponse createProduct(@RequestBody ProductRequest productRequest) throws URISyntaxException, IOException, InterruptedException {
         return new ProductResponse(this.productService.createProduct(productRequest));
     }
 
     @PutMapping("{productId}")
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void updateProduct(@RequestBody ProductRequest productRequest, @PathVariable Long productId) {
         this.productService.updateProduct(productRequest, productId);
     }
 
     @DeleteMapping("{productId}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public void deleteProduct(@PathVariable Long productId) {
         this.productService.deleteProduct(productId);
     }
 
     @GetMapping("/add-index")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public JSONObject addIndex() throws URISyntaxException, IOException, InterruptedException {
         Response stringHttpResponse = this.elasticSearchService.addIndex();
         JSONObject jsonHttpResponse = new JSONObject();
@@ -71,6 +78,7 @@ public class ProductController {
 
     @GetMapping("/search/{category}")
     @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasAuthority('ROLE_USER') or hasAuthority('ROLE_ADMIN')")
     public List<Product> search(@PathVariable String category) throws IOException, URISyntaxException, InterruptedException, ParseException {
         return this.elasticSearchService.search(Category.valueOf(category.toUpperCase()));
     }

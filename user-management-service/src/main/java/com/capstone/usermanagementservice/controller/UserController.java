@@ -24,6 +24,16 @@ public class UserController {
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    @PostMapping
+    public void addUser(@RequestBody User user) {
+        this.userService.addUser(user);
+    }
+
+    @DeleteMapping
+    public void deleteUser(@RequestBody User user) {
+        this.userService.deleteUser(user.getUsername());
+    }
+
     @PutMapping
     public String updateUser(@RequestBody User user) {
         this.userService.updateUser(user);

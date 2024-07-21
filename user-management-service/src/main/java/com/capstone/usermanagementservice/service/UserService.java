@@ -35,4 +35,16 @@ public class UserService {
         savedUser.setMobile(user.getMobile());
         this.userRepository.save(savedUser);
     }
+
+    public void addUser(User user) {
+        this.userRepository.save(user);
+    }
+
+    public void deleteUser(String username) {
+        Optional<User> userOptional = this.userRepository.findByUsername(username);
+        if(userOptional.isEmpty()) {
+            throw new UsernameNotFoundException("User doesn't exist.");
+        }
+        this.userRepository.delete(userOptional.get());
+    }
 }
