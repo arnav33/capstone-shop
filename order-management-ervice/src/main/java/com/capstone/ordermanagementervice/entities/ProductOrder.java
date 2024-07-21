@@ -2,6 +2,8 @@ package com.capstone.ordermanagementervice.entities;
 
 import com.capstone.ordermanagementervice.dtos.CreateOrderRequest;
 import com.capstone.ordermanagementervice.dtos.OrderRequest;
+import com.capstone.ordermanagementervice.enumerations.OrderStatus;
+import com.capstone.ordermanagementervice.enumerations.PayType;
 import com.capstone.ordermanagementervice.enumerations.PaymentStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Enumerated;
@@ -24,6 +26,8 @@ public class ProductOrder extends BaseEntity {
     private UUID cartId;
     @Enumerated
     private PaymentStatus paymentStatus;
+    private PayType payType;
+    private OrderStatus orderStatus;
 
     public ProductOrder(OrderRequest orderRequest) {
         this.userId = orderRequest.getUserId();

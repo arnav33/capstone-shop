@@ -2,6 +2,7 @@ package com.capstone.paymentservice.entities;
 
 import java.util.UUID;
 
+import com.capstone.paymentservice.enumerations.Currency;
 import com.capstone.paymentservice.enumerations.PaymentStatus;
 
 import jakarta.persistence.Entity;
@@ -27,4 +28,5 @@ public class ProductReceipt {
     private PaymentStatus paymentStatus;
     private String productId;
     private String priceId;
+    Currency currency;
 }
